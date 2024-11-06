@@ -1,6 +1,4 @@
-# Day 2 - Nuxt3 專案引入 CSS 樣式 題目
-
-
+## Day 2 - Nuxt3 專案引入 CSS 樣式 題目
 請 clone 這一份模板，在 Nuxt3 引入 Bootstrap5  v5.3.3 並達成以下條件 :
 - 設置  assets/stylesheets   資料夾，在內層新增 all.scss 檔案並引入以下 [bootstrap5 的 SCSS](https://getbootstrap.com/docs/5.3/customize/sass/#importing)
 
@@ -30,6 +28,10 @@
 - 新增 page/index 頁面，並使用 Bootstrap5  [按鈕元件](https://getbootstrap.com/docs/5.3/components/buttons/#variants)
 - 在 Nuxt.config.ts 設定全域共用 bootstrap5  的 SCSS 變數 ，並且可以直接使用在 .vue 檔案內的 `<style></style>`
 
+## Day 3 - 使用指令建立 Layouts 解答
+- 使用 Nuxt3 Layout 功能拆分前台與後台的頁首頁尾區塊
+- 前台 index.vue 與 about.vue 頁面皆使用 default.vue 模板 ( 預設 Layout ）
+- 後台 admin/index.vue 與 admin/order.vue 頁面皆使用 admin.vue 模板 ( 具名 Layout )
 
 ## 安裝
 
