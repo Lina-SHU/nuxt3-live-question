@@ -1,4 +1,5 @@
 <script setup>
+const route = useRoute();
 const router = useRouter();
 const roomsList = ref([]);
 // 使用 fetch 或 axios 串接 前台房型 API ( GET )
@@ -33,7 +34,7 @@ const goToDetail = () => {
 </script>
 
 <template>
-  <h1>房型頁面</h1>
+  <h2>房型頁面：{{ route.fullPath }}</h2>
   <div class="container mt-4">
     <div class="row justify-content-center">
       <div class="col-8 col-md-6 col-lg-3" v-for="room in roomsList" :key="room._id">
