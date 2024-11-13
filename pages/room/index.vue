@@ -28,17 +28,17 @@ onMounted(() => {
   getRoomList();
 });
 
-const goToDetail = () => {
-    router.push('/room/_id');
+const goToDetail = (roomId) => {
+    router.push(`/room/${roomId}`);
 }
 </script>
 
 <template>
-  <h2>房型頁面：{{ route.fullPath }}</h2>
+  <h2>房型 index ：{{ route.fullPath }}</h2>
   <div class="container mt-4">
     <div class="row justify-content-center">
       <div class="col-8 col-md-6 col-lg-3" v-for="room in roomsList" :key="room._id">
-        <div class="card h-100 shadow-sm" @click="goToDetail">
+        <div class="card h-100 shadow-sm" @click="goToDetail(room._id)">
           <img :src="room.imageUrl" class="card-img-top" alt="Room Image" />
           <div class="card-body d-flex flex-column">
             <h3 class="card-title">{{ room.name }}</h3>
