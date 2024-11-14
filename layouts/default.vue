@@ -22,6 +22,9 @@
           <li class="nav-item">
             <nuxt-link to="/room" class="nav-link">房型介紹</nuxt-link>
           </li>
+          <li class="nav-item">
+            <nuxt-link to="/register" class="nav-link">註冊</nuxt-link>
+          </li>
         </ul>
       </div>
     </div>
