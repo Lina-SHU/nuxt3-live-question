@@ -1,3 +1,8 @@
+## Day 10 - useFetch 與 useAsyncData
+- 將 pages/room/index.vue 取得房型列表以及 pages/room/[id].vue 取得取得房型詳細資料功能使用的 ES6 fetch() 修改成使用 Nuxt3 useFetch() 或是 useAsyncData() 在伺服器端取得資料。
+- 在 pages/room/index.vue 的房型列表中，點擊房型後能夠進入房型內頁。
+- 進入房型內頁後，透過動態路由的網址參數 串接 API 取得房型詳細資料。
+
 ## Day 9 - $fetch 與 ofetch
 - 在 /pages/register.vue 使用模板提供的操作介面填寫註冊表單。點擊 “註冊” 按鈕後使用 Nuxt3 提供的方法串接旅館的 註冊 API ，將請求送出。
 - 需使用 try catch 處理請求成功與失敗的訊息，請求成功與失敗皆使用 sweetAlert2 套件 顯示訊息。sweetAlert2 套件在模板已有安裝與引入，不需再額外設定。

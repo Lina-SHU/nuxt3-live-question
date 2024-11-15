@@ -1,36 +1,43 @@
 <script setup>
 const route = useRoute();
 const router = useRouter();
-const roomsList = ref([]);
 // 使用 fetch 或 axios 串接 前台房型 API ( GET )
 // apiUrl : https://nuxr3.zeabur.app/api/v1/rooms
 // response 回傳後，將資料寫入 roomsList 變數
 // 使用 roomsList 變數在下方 template 渲染列表
-const getRoomList = async () => {
-  try {
-      const apiUrl = 'https://nuxr3.zeabur.app/api/v1/rooms';
-      const res = await fetch(apiUrl);
+// const getRoomList = async () => {
+//   try {
+//       const apiUrl = 'https://nuxr3.zeabur.app/api/v1/rooms';
+//       const res = await fetch(apiUrl);
 
-      if (!res.ok) {
-        alert(res.status);
-        return
-      }
+//       if (!res.ok) {
+//         alert(res.status);
+//         return
+//       }
 
-      const { result } = await res.json();
-      roomsList.value = result;
+//       const { result } = await res.json();
+//       roomsList.value = result;
       
-  } catch (error) {
-      alert(error.message);
+//   } catch (error) {
+//       alert(error.message);
+//   }
+// };
+// onMounted(() => {
+//     getRoomList();
+// });
+// 改成 useFetch
+const apiUrl = 'https://nuxr3.zeabur.app/api/v1/rooms';
+const { data: roomsList } = await useFetch('/rooms', {
+  baseURL: 'https://nuxr3.zeabur.app/api/v1',
+  transform: (response) => {
+    const { result } = response;
+    return result;
   }
-};
-
-onMounted(() => {
-  getRoomList();
 });
 
 const goToDetail = (roomId) => {
     router.push(`/room/${roomId}`);
-}
+};
 </script>
 
 <template>

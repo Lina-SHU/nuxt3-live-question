@@ -5,27 +5,36 @@ const router = useRouter();
 // 串接 API 取得房型詳細資料
 // API path : https://nuxr3.zeabur.app/api/v1/rooms/{id}
 // 將資料渲染至下方的 div.room-page 區塊
-const roomInfo = ref({});
-const getRoomInfo = async () => {
-  try {
-      const apiUrl = `https://nuxr3.zeabur.app/api/v1/rooms/${route.params.id}`;
-      const res = await fetch(apiUrl);
+// const roomInfo = ref({});
+// const getRoomInfo = async () => {
+//   try {
+//       const apiUrl = `https://nuxr3.zeabur.app/api/v1/rooms/${route.params.id}`;
+//       const res = await fetch(apiUrl);
 
-      if (!res.ok) {
-        alert(res.status);
-        return
-      }
+//       if (!res.ok) {
+//         alert(res.status);
+//         return
+//       }
 
-      const { result } = await res.json();
-      roomInfo.value = result;
+//       const { result } = await res.json();
+//       roomInfo.value = result;
       
-  } catch (error) {
-      alert(error.message);
-  }
-};
+//   } catch (error) {
+//       alert(error.message);
+//   }
+// };
 
-onMounted(() => {
-    getRoomInfo();
+// onMounted(() => {
+//     getRoomInfo();
+// });
+
+// 改成 useFetch
+const {data: roomInfo, status, error} = await useFetch(`/rooms/${route.params.id}`, {
+  baseURL: 'https://nuxr3.zeabur.app/api/v1',
+  transform: (response) => {
+    const { result } = response;
+    return result ;
+  }
 });
 </script>
 
