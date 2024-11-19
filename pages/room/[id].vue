@@ -2,6 +2,20 @@
 const route = useRoute();
 const router = useRouter();
 
+// 使用 useSeoMeta  將 roomObject 的資訊寫入 SEO Meta
+/* 請撰寫 useSeoMeta({ }) 渲染出下方的 HTML 結構，並將 {{ }}  改成使用 roomObject 物件的資料。
+<title> Freyja | {{ 房型名稱 }}</title>
+<meta name="description" content="{{ 房型描述 }}">
+<meta property="og:title" content="Freyja | {{ 房型名稱 }} ">
+<meta property="og:description" content="{{ 房型描述 }}">
+<meta property="og:image" content="{{房型主圖}}">
+<meta property="og:url" content="https://freyja.travel.com.tw/room/{房型 id }">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Freyja | {{ 房型名稱 }}">
+<meta name="twitter:description" content="{{ 房型描述 }}">
+<meta name="twitter:image" content="{{房型主圖}}">
+*/
+
 // 串接 API 取得房型詳細資料
 // API path : https://nuxr3.zeabur.app/api/v1/rooms/{id}
 // 將資料渲染至下方的 div.room-page 區塊
@@ -35,6 +49,20 @@ const {data: roomInfo, status, error} = await useFetch(`/rooms/${route.params.id
     const { result } = response;
     return result ;
   }
+});
+
+useSeoMeta({
+  title: roomInfo.value.name,
+  titleTemplate: (title) => `Freyja | ${title}`,
+  description: () => roomInfo.value.description,
+  ogTitle: () => `Freyja | ${roomInfo.value.name}`,
+  ogDescription: () => `${roomInfo.value.description}`,
+  ogImage: () => `${roomInfo.value.imageUrl}`,
+  ogUrl: () => `https://freyja.travel.com.tw/room/${roomInfo._id}`,
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => `Freyja | ${roomInfo.value.name}`,
+  twitterDescription: () => `${roomInfo.value.description}`,
+  twitterImage: () => `${roomInfo.value.imageUrl}`
 });
 </script>
 

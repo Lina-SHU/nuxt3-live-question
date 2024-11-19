@@ -1,3 +1,8 @@
+## Day 12 - useSeoMeta 與 useServerSeoMeta
+在 /pages/room/[id].vue 房型詳細頁面作答，完成以下條件 :
+- 在取得房型詳細資料的 roomObject 物件後，使用 useSeoMeta 將 roomObject 的資訊寫入 SEO Meta 。
+- 伺服器端提交給搜尋引擎爬蟲以及客戶端渲染的 SEO Meta 皆使用使用下方結構的標籤。請撰寫 useSeoMeta({ }) 渲染出下方的 HTML 結構，並將 {{ }} 替換成使用 roomObject 物件的資料。
+
 ## Day 11 - Global head Settings 與 useHead
 - 在 nuxt.config.ts 中定義全域設定，確保以下 head 資訊被應用於所有頁面。
 ```
