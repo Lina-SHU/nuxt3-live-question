@@ -1,3 +1,9 @@
+## Day 15 - middleware  與登入狀態驗證
+- 在 /login頁面登入成功後，使用 router 導航至 /orders 頁面。
+- 在進入 /orders 頁面之前使用名稱為 “auth” 的具名 middleware 驗證登入狀態。
+- 驗證登入需使用旅館的 /api/v1/user/check API ，並使用 try catch 捕捉錯誤 。
+- 驗證成功，允許進入 /orders 頁面。驗證失敗，將路由導航回 /login 頁面。
+
 ## Day 14 - 登入功能與存入 Cookie
 - 在 /pages/login.vue 頁面串接旅館的 登入 API ( 需使用 try catch )。登入成功後，使用 useCookie() 將 token 寫入名稱為 “auth” 的 cookie。
 
