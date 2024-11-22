@@ -2,7 +2,7 @@
 const route = useRoute();
 const router = useRouter();
 
-// 使用 useSeoMeta  將 roomObject 的資訊寫入 SEO Meta
+// Day 12 使用 useSeoMeta  將 roomObject 的資訊寫入 SEO Meta
 /* 請撰寫 useSeoMeta({ }) 渲染出下方的 HTML 結構，並將 {{ }}  改成使用 roomObject 物件的資料。
 <title> Freyja | {{ 房型名稱 }}</title>
 <meta name="description" content="{{ 房型描述 }}">
@@ -51,6 +51,9 @@ const {data: roomInfo, status, error} = await useFetch(`/rooms/${route.params.id
   }
 });
 
+/* 
+Day 13 請將 useSeoMeta({ }) 改成 Nuxt3 SEO 元件的寫法
+重複邏輯的地方可以使用 computed 
 useSeoMeta({
   title: roomInfo.value.name,
   titleTemplate: (title) => `Freyja | ${title}`,
@@ -64,9 +67,25 @@ useSeoMeta({
   twitterDescription: () => `${roomInfo.value.description}`,
   twitterImage: () => `${roomInfo.value.imageUrl}`
 });
+*/
+const pageTitle = ref('Freyja');
+const titleTemplate = computed(() => `${pageTitle.value} | ${roomInfo.value.name}`);
+const socialMediaUrl = computed(() => `https://freyja.travel.com.tw/room/${roomInfo.value._id}`);
 </script>
 
 <template>
+  <Head>
+    <Title>{{ titleTemplate }}</Title>
+    <Meta name="description" :content="roomInfo.description"></Meta>
+    <Meta property="og:title" :content="titleTemplate" ></Meta>
+    <Meta property="og:description" :content="roomInfo.description" ></Meta>
+    <Meta property="og:image" :content="roomInfo.imageUrl" ></Meta>
+    <Meta property="og:url" :content="socialMediaUrl"></Meta>
+    <Meta property="twitter:card"  content="summary_large_image"></Meta>
+    <Meta property="twitter:title" :content="titleTemplate" ></Meta>
+    <Meta property="twitter:description" :content="roomInfo.description" ></Meta>
+    <Meta property="twitter:image" :content="roomInfo.imageUrl" ></Meta>
+  </Head>
   <h2>房型詳細頁面</h2>
 
   <div class="container">

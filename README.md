@@ -1,3 +1,7 @@
+## Day 13 - SEO Meta Components
+- 將原本使用的 useSeoMeta({ }) 方法，改為使用 Nuxt3 的 SEO 元件來渲染頁面的 Meta 標籤（如 <Title>、<Meta> 等）。
+- 使用 computed 計算出所需的 SEO Meta 資訊，避免重複邏輯，並將這些資料應用到 SEO 元件中。
+
 ## Day 12 - useSeoMeta 與 useServerSeoMeta
 在 /pages/room/[id].vue 房型詳細頁面作答，完成以下條件 :
 - 在取得房型詳細資料的 roomObject 物件後，使用 useSeoMeta 將 roomObject 的資訊寫入 SEO Meta 。
