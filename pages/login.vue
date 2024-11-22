@@ -1,4 +1,5 @@
 <script setup>
+const router = useRouter();
 const { $swal } = useNuxtApp();
 
 // 表單格式
@@ -51,6 +52,7 @@ const loginAccount = async () => {
         showConfirmButton: false,
         timer: 1500
     });
+    router.push('/orders');
  } catch (error) {
     const { message } = error.response._data;
     if (Array.isArray(message)) {
