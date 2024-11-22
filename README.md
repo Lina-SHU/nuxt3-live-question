@@ -1,3 +1,6 @@
+## Day 14 - 登入功能與存入 Cookie
+- 在 /pages/login.vue 頁面串接旅館的 登入 API ( 需使用 try catch )。登入成功後，使用 useCookie() 將 token 寫入名稱為 “auth” 的 cookie。
+
 ## Day 13 - SEO Meta Components
 - 將原本使用的 useSeoMeta({ }) 方法，改為使用 Nuxt3 的 SEO 元件來渲染頁面的 Meta 標籤（如 <Title>、<Meta> 等）。
 - 使用 computed 計算出所需的 SEO Meta 資訊，避免重複邏輯，並將這些資料應用到 SEO 元件中。

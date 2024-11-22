@@ -1,5 +1,6 @@
 
 <script setup>
+const router = useRouter();
 const { $swal } = useNuxtApp();
 
 // 表單格式
@@ -30,6 +31,7 @@ const register = async () => {
             timer: 1500
         });
         userRegisteObject.value = { address: { zipcode: '', detail: '' } };
+        router.push('/login');
     } catch (error) {
         const { message } = error.response._data;
         $swal.fire({
@@ -71,7 +73,7 @@ const register = async () => {
                   class="form-control"
                   id="email"
                   placeholder="example@gmail.com"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                   required
                   v-model="userRegisteObject.email"
                 />
@@ -152,6 +154,7 @@ const register = async () => {
               <button class="btn btn-lg btn-primary w-100" type="submit">
                 註冊
               </button>
+              <NuxtLink to="/login" class="d-block text-center mt-3">已經有帳號了？前往登入</NuxtLink>
             </form>
           </div>
         </div>
