@@ -1,3 +1,14 @@
+## Day 16 - Nuxt3 插件 ( Plugins )  - provide
+- 使用 Nuxt3 Plugin 功能在 /plugins/bootstrap.js 引入 bootstrap5 v5.3.3 版本Offcanvas 與 Modal 元件的 JavaScript 功能，並將 new bootstrap.Offcanvas() 與 new bootstrap.Modal() 提供為全域輔助函式。( Modal 官方文件 、 Offcanvas 官方文件)
+```
+// 加入全域輔助函式
+new bootstrap.Offcanvas(element, options);
+new bootstrap.Modal(element, options);
+```
+- 在 /pages/index.vue 中，從 Plugin 取出 Offcanvas 和 Modal 並在 onMounted 生命週期初始化元件。使用 <template> 中的按鈕，透過 @click 事件來操作元件的 .show() 和 .hide() 方法，以控制元件的開啟與關閉。
+- bootstrap5 SCSS 在模板中已經有提供，不需額外設定。
+- 請根據下圖 bootstrap5 v5.3.3 Modal 功能的 原始碼 判斷 Plugin 是否需要限制插件的執行環境（伺服器端或客戶端，或是無需限制）。
+
 ## Day 15 - middleware  與登入狀態驗證
 - 在 /login頁面登入成功後，使用 router 導航至 /orders 頁面。
 - 在進入 /orders 頁面之前使用名稱為 “auth” 的具名 middleware 驗證登入狀態。
