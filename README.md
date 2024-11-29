@@ -1,3 +1,7 @@
+## Day 18 - Nuxt3 插件 ( Plugins ) - 整合 Vue3 插件
+- 在 plugins/loading.js 中使用 Nuxt3 插件系統整合 vue-loading-overlay 套件。
+- 套件整合後，在 /pages/index.vue 中透過按鈕點擊的方式開啟與關閉讀取效果。
+
 ## Day 17 - Nuxt3 插件 ( Plugins ) - directive
 - 在 plugins/textformat.js 中作答，建立名稱為 textformat 的指令，允許提供修飾符 :uppercase 和 :lowercase 實作大寫或小寫字母的轉換。
   - 當使用 :uppercase 時，將文字轉換為全大寫。

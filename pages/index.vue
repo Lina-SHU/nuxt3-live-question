@@ -1,6 +1,16 @@
 <script setup>
+const { $useLoading } = useNuxtApp();
+
 const message = ref("A1B2c3deFGhijk");
 const time = ref(1730427600000);
+
+const loader = $useLoading();
+const toggleLoading = () => {
+  const loaderHandler = loader.show();
+  setTimeout(() => {
+    loaderHandler.hide();
+  }, 2000);
+};
 </script>
 
 <template>
@@ -40,6 +50,8 @@ const time = ref(1730427600000);
   <!-- 轉換成 yyyy-mm-dd hh:mm:ss 格式之後將結果寫入元素 -->
   <!-- 1730427600000 => 轉換成 yyyy-mm-dd hh:mm:ss  -->
   <p v-timeformat="time"></p>
+
+  <button type="button" class="btn btn-primary" @click="toggleLoading">loading</button>
 </template>
 
 <style scoped lang="scss">
