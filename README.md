@@ -1,3 +1,39 @@
+## Day 17 - Nuxt3 插件 ( Plugins ) - directive
+- 在 plugins/textformat.js 中作答，建立名稱為 textformat 的指令，允許提供修飾符 :uppercase 和 :lowercase 實作大寫或小寫字母的轉換。
+  - 當使用 :uppercase 時，將文字轉換為全大寫。
+  - 當使用 :lowercase 時，將文字轉換為全小寫。
+文字字串以及元素已於 pages/index.vue 中提供，如下
+```
+<script setup>
+const message = ref("A1B2c3deFGhijk");
+</script>
+
+<template>
+  <h2>自訂英文文字大小寫轉換指令</h2>
+  <!-- 使用 plugins/textformat.js 建立的指令，將變數 message 的字串帶入 -->
+
+  <!-- 大寫轉小寫格式之後，將結果寫入元素 -->
+  <p></p>
+  <!-- 小寫轉大寫格式之後，將結果寫入元素 -->
+  <p></p>
+
+</template>
+```
+- 在 plugins/timeformat.js 中作答，建立名稱為 timeformat的時間格式轉換指令，把傳入的時間戳轉換為 yyyy-mm-dd hh:mm:ss格式並顯示在頁面上。時間戳以及元素已於 pages/index.vue 中提供，如下
+```
+<script setup>
+const time = ref(1730427600000);
+</script>
+
+<template>
+  <h2>自訂時間轉換指令</h2>
+  <!-- 使用 plugins/timeformat.js 建立的指令，將變數 time 的時間戳帶入 -->
+  <!-- 轉換成 yyyy-mm-dd hh:mm:ss 格式之後將結果寫入元素 -->
+  <!-- 1730427600000 => 轉換成 yyyy-mm-dd hh:mm:ss  -->
+  <p></p>
+</template>
+```
+
 ## Day 16 - Nuxt3 插件 ( Plugins )  - provide
 - 使用 Nuxt3 Plugin 功能在 /plugins/bootstrap.js 引入 bootstrap5 v5.3.3 版本Offcanvas 與 Modal 元件的 JavaScript 功能，並將 new bootstrap.Offcanvas() 與 new bootstrap.Modal() 提供為全域輔助函式。( Modal 官方文件 、 Offcanvas 官方文件)
 ```
