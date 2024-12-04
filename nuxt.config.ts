@@ -9,11 +9,14 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
+          api: 'modern-compiler',
+          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import'],
           additionalData: `@import "bootstrap/scss/functions"; @import "bootstrap/scss/variables";`
         }
       }
     }
   },
+  modules: ["@pinia/nuxt"],
   router: {
     options: {
       linkActiveClass: 'active',

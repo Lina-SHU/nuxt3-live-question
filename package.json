@@ -9,9 +9,14 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
+  "overrides": {
+    "vue": "latest"
+  },
   "dependencies": {
+    "@pinia/nuxt": "^0.8.0",
     "bootstrap": "^5.3.3",
-    "nuxt": "^3.12.4",
+    "nuxt": "^3.13.0",
+    "pinia": "^2.2.8",
     "sweetalert2": "^11.14.5",
     "vue": "latest",
     "vue-loading-overlay": "^6.0.6"

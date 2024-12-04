@@ -1,3 +1,15 @@
+## Day 19 - Nuxt3 狀態管理 - Pinia - ( 1 )
+- 在 nuxt.config.ts 添加 @pinia/nuxt 模組，讓它在 Nuxt 中可以運作。
+- 在 stores/booking.js 建立一個名為 useBookingStore 的 Pina store ，用來管理訂單資訊。
+```
+// /stores/booking.js
+// 建立名稱為 useBookingStore 的 store 
+
+// export const xxx = ... ;
+```
+- 使用  `/pages/Day19.vue` 的 `createOrder()` 方法建立訂單，將被選取的房型 `roomInfo` 和訂房人資料 `userInfo` 整合為 `bookingResult`，並將 `bookingResult` 移至 `useBookingStore` 中進行狀態管理 ( 格式如下 )。完成後，使用 `useRouter` 的方法導引至 `/order` 頁面。
+- 進入 `/orders` 頁面後，從 `useBookingStore`  中取出訂單資料 `bookingResult` 並顯示於頁面中。如果沒有訂單資料，顯示 "目前沒有預訂資訊"。
+
 ## Day 18 - Nuxt3 插件 ( Plugins ) - 整合 Vue3 插件
 - 在 plugins/loading.js 中使用 Nuxt3 插件系統整合 vue-loading-overlay 套件。
 - 套件整合後，在 /pages/index.vue 中透過按鈕點擊的方式開啟與關閉讀取效果。
