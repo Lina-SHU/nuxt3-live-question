@@ -48,7 +48,12 @@ const { data: roomsList } = await useFetch('/rooms', {
   transform: (response) => {
     const { result } = response;
     return result;
-  }
+  },
+  onResponseError({ response }) {
+    const { message } = response._data;
+    console.error("Error:", message);
+    router.push("/");
+  },
 });
 
 const goToDetail = (roomId) => {

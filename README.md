@@ -1,3 +1,34 @@
+## Day 20 - Nuxt3 狀態管理 - Pinia - ( 2 )
+- 在 `/pages/room.vue` 的房型列表中，點擊房型進入房型詳細頁（`/pages/room/[id].vue`），將取得的房型資料寫入 Pinia Store ，並渲染於頁面模板。
+
+```jsx
+// 將房型資料 data 改成使用 Pinia 管理
+const { data, error } = await useAsyncData(`room-data`, async () => {
+  const response = await $fetch(`/rooms/${id}`, {
+    baseURL: "https://nuxr3.zeabur.app/api/v1",
+  });
+  return response.result;
+});
+```
+
+- 在房型詳細頁點擊「立即預訂」按鈕後，導向 `/pages/booking.vue` 預約頁面。在此頁面中，將房型資料從 Pinia Store 取出，渲染於頁面模板。
+
+```jsx
+// /pages/booking.vue
+
+<script setup>
+// 將 bookingInfo 改成使用 Pinia 的資料
+const bookingInfo = ref({});
+</script>
+```
+
+- 補充，Pinia Store 的檔案已於 `stores/booking.js` 提供，請將匯出的 Store 名稱命名為 `useBookingStore`  。
+
+```jsx
+/stores/booking.js
+// export const useBookingStore = 
+```
+
 ## Day 19 - Nuxt3 狀態管理 - Pinia - ( 1 )
 - 在 nuxt.config.ts 添加 @pinia/nuxt 模組，讓它在 Nuxt 中可以運作。
 - 在 stores/booking.js 建立一個名為 useBookingStore 的 Pina store ，用來管理訂單資訊。

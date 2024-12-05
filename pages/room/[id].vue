@@ -42,14 +42,14 @@ const router = useRouter();
 //     getRoomInfo();
 // });
 
-// 改成 useFetch
+/* 改成 useFetch
 const {data: roomInfo, status, error} = await useFetch(`/rooms/${route.params.id}`, {
   baseURL: 'https://nuxr3.zeabur.app/api/v1',
   transform: (response) => {
     const { result } = response;
     return result ;
   }
-});
+});*/
 
 /* 
 Day 13 請將 useSeoMeta({ }) 改成 Nuxt3 SEO 元件的寫法
@@ -69,22 +69,40 @@ useSeoMeta({
 });
 */
 const pageTitle = ref('Freyja');
-const titleTemplate = computed(() => `${pageTitle.value} | ${roomInfo.value.name}`);
-const socialMediaUrl = computed(() => `https://freyja.travel.com.tw/room/${roomInfo.value._id}`);
+const titleTemplate = computed(() => `${pageTitle.value} | ${bookingInfo.value.name}`);
+const socialMediaUrl = computed(() => `https://freyja.travel.com.tw/room/${bookingInfo.value._id}`);
+
+const bookingStore = useBookingStore();
+const { bookingInfo } = storeToRefs(bookingStore);
+// 將房型資料 data 改成使用 Pinia 管理
+const { error } = await useAsyncData(`room-data`, async () => {
+  const response = await $fetch(`/rooms/${route.params.id}`, {
+    baseURL: "https://nuxr3.zeabur.app/api/v1",
+  });
+  const { result } = response;
+  bookingStore.setBookingInfo(result);
+
+  return response;
+});
+
+if (error.value) {
+  alert("發生錯誤 ! ");
+  router.push("/room");
+}
 </script>
 
 <template>
   <Head>
     <Title>{{ titleTemplate }}</Title>
-    <Meta name="description" :content="roomInfo.description"></Meta>
+    <Meta name="description" :content="bookingInfo.description"></Meta>
     <Meta property="og:title" :content="titleTemplate" ></Meta>
-    <Meta property="og:description" :content="roomInfo.description" ></Meta>
-    <Meta property="og:image" :content="roomInfo.imageUrl" ></Meta>
+    <Meta property="og:description" :content="bookingInfo.description" ></Meta>
+    <Meta property="og:image" :content="bookingInfo.imageUrl" ></Meta>
     <Meta property="og:url" :content="socialMediaUrl"></Meta>
     <Meta property="twitter:card"  content="summary_large_image"></Meta>
     <Meta property="twitter:title" :content="titleTemplate" ></Meta>
-    <Meta property="twitter:description" :content="roomInfo.description" ></Meta>
-    <Meta property="twitter:image" :content="roomInfo.imageUrl" ></Meta>
+    <Meta property="twitter:description" :content="bookingInfo.description" ></Meta>
+    <Meta property="twitter:image" :content="bookingInfo.imageUrl" ></Meta>
   </Head>
   <h2>房型詳細頁面</h2>
 
@@ -94,41 +112,41 @@ const socialMediaUrl = computed(() => `https://freyja.travel.com.tw/room/${roomI
       <div class="col-md-6">
         <div class="room-page">
           <div class="room-header">
-            <h1 class="room-name">{{ roomInfo.name }}</h1>
+            <h1 class="room-name">{{ bookingInfo.name }}</h1>
             <p class="room-description">
-              {{ roomInfo.description }}
+              {{ bookingInfo.description }}
             </p>
           </div>
 
           <div class="room-gallery">
             <img
-              :src="roomInfo.imageUrl"
-              :alt="roomInfo.name"
+              :src="bookingInfo.imageUrl"
+              :alt="bookingInfo.name"
               class="room-main-image"
             />
-            <div class="room-image-list">
-              <img
-                v-for="(image, index) in roomInfo.imageUrlList"
-                :key="image"
-                :src="image"
-                :alt="`圖片${index + 1}`"
-              />
-            </div>
+            <ul class="room-image-list">
+              <li v-for="(imageUrl, index) in bookingInfo.imageUrlList">
+                <img :src="imageUrl" :alt="`${bookingInfo.name}圖片${index + 1}`" />
+              </li>
+            </ul>
+            <NuxtLink class="btn btn-lg btn-warning" to="/booking"
+              >立即預約</NuxtLink
+            >
           </div>
 
           <div class="room-info">
             <div class="info-block">
               <h2>房間資訊</h2>
-              <p>面積: {{ roomInfo.areaInfo }}</p>
-              <p>床型: {{ roomInfo.bedInfo }}</p>
-              <p>最多容納人數: {{ roomInfo.maxPeople }}</p>
-              <p>價格: NT${{ roomInfo.price }}</p>
+              <p>面積: {{ bookingInfo.areaInfo }}</p>
+              <p>床型: {{ bookingInfo.bedInfo }}</p>
+              <p>最多容納人數: {{ bookingInfo.maxPeople }}</p>
+              <p>價格: NT${{ bookingInfo.price }}</p>
             </div>
 
             <div class="info-block">
               <h2>房間配置</h2>
               <ul>
-                <li v-for="layout in roomInfo.layoutInfo" :key="layout">
+                <li v-for="layout in bookingInfo.layoutInfo" :key="layout">
                     {{ layout.title }}: {{ layout.isProvide ? '提供' : '未提供' }}
                 </li>
               </ul>
@@ -137,7 +155,7 @@ const socialMediaUrl = computed(() => `https://freyja.travel.com.tw/room/${roomI
             <div class="info-block">
               <h2>房內設施</h2>
               <ul>
-                <li v-for="facility in roomInfo.facilityInfo" :key="facility">
+                <li v-for="facility in bookingInfo.facilityInfo" :key="facility">
                     {{ facility.title }}: {{ facility.isProvide ? '提供' : '未提供' }}
                 </li>
               </ul>
@@ -146,7 +164,7 @@ const socialMediaUrl = computed(() => `https://freyja.travel.com.tw/room/${roomI
             <div class="info-block">
               <h2>客房備品</h2>
               <ul>
-                <li v-for="amenity in roomInfo.amenityInfo" :key="amenity">
+                <li v-for="amenity in bookingInfo.amenityInfo" :key="amenity">
                     {{ amenity.title }}: {{ amenity.isProvide ? '提供' : '未提供' }}
                 </li>
               </ul>
