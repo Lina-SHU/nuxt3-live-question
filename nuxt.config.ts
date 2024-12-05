@@ -16,7 +16,7 @@ export default defineNuxtConfig({
       }
     }
   },
-  modules: ["@pinia/nuxt"],
+  modules: ["@pinia/nuxt", "@vee-validate/nuxt"],
   router: {
     options: {
       linkActiveClass: 'active',
